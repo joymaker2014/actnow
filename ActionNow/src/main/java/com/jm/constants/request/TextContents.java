@@ -9,7 +9,7 @@ package com.jm.constants.request;
  */
 public enum TextContents {
 	DEVELOPING("开发中，敬请期待！"), SUBMIT_BASIC("请提交基本信息"), MENU_ROOT(
-			"请选择以下请求：\n 1 开始事件\n 2 结束事件\n 3 查询积分\n 4 兑换讲评\n"), EVENT_END("事件结束");
+			"请选择以下请求：\n 1 开始事件\n 2 结束事件\n 3 查询积分\n 4 兑换奖品\n"), EVENT_END("事件提交成功，谢谢！");
 	private final String _content;
 
 	TextContents(String content) {
