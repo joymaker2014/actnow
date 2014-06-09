@@ -17,7 +17,7 @@ import com.jm.constants.response.ResponseKeys;
  */
 public class TextResponse {
 
-	public String createResponse(String fromName, String toName) {
+	public String createResponse(String fromName, String toName, String text) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 		String times = format.format(new Date());
 
@@ -31,7 +31,7 @@ public class TextResponse {
 		rootXML.addContent(new Element(ResponseKeys.MSGTYPE.toString())
 				.setText("text"));
 		rootXML.addContent(new Element(ResponseKeys.CONTENT.toString())
-				.setText("开发中，敬请期待！"));
+				.setText(text));
 
 		XMLOutputter XMLOut = new XMLOutputter();
 		return XMLOut.outputString(rootXML);

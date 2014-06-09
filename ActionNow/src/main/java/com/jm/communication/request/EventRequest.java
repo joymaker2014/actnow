@@ -23,31 +23,43 @@ public class EventRequest {
 	public void handle(Map<String, String> datas) {
 		String eventType = CommonUtils
 				.getRequestValue(datas, RequestKeys.EVENT);
+		String openid = datas.get(RequestKeys.FROMUSERNAME.toString());
+		User existUser = ServiceUtils.getUserservice().findUserById(openid);
 		if (eventType.equalsIgnoreCase(EventType.SUBSCRIBE.toString())) {
-			String openid = datas.get(RequestKeys.FROMUSERNAME);
-			List<User> users = ServiceUtils.getUserservice()
-					.findUserOrderByNicknameDesc();
-			User user = new User();
-			user.setOpenid(openid);
-			user.setNickname("user1");
-			user.setAccount(0);
-			user.setBlackNum(0);
-			user.setCity("北京市");
-			user.setCountry("朝阳区");
-			user.setCredit(0);
-			user.setHeadImageUrl(null);
-			user.setProvince("北京市");
-			user.setSex(Sex.MALE);
-			user.setSubscribe(true);
-			user.setSubscribeTime(new Date());
-			if (null == users || users.isEmpty()) {
-				user.setNickname("user1");
+			if (null != existUser) {
+				existUser.setSubscribe(true);
+				existUser.setSubscribeTime(new Date());
 			} else {
-				String maxUserName = users.get(0).getNickname();
-				String maxSuffix = maxUserName.substring(4) + 1;
-				user.setNickname("user" + maxSuffix);
+				List<User> users = ServiceUtils.getUserservice()
+						.findUserOrderByNicknameDesc();
+				existUser = new User();
+				existUser.setOpenid(openid);
+				existUser.setNickname("user1");
+				existUser.setAccount(0);
+				existUser.setBlackNum(0);
+				existUser.setCity("北京市");
+				existUser.setCountry("朝阳区");
+				existUser.setCredit(0);
+				existUser.setHeadImageUrl(null);
+				existUser.setProvince("北京市");
+				existUser.setSex(Sex.MALE);
+				existUser.setSubscribe(true);
+				existUser.setSubscribeTime(new Date());
+				if (null == users || users.isEmpty()) {
+					existUser.setNickname("user1");
+				} else {
+					String maxUserName = users.get(0).getNickname();
+					String maxSuffix = maxUserName.substring(4) + 1;
+					existUser.setNickname("user" + maxSuffix);
+				}
 			}
-			ServiceUtils.getUserservice().saveUser(user);
+			ServiceUtils.getUserservice().saveUser(existUser);
+		} else if (eventType.equalsIgnoreCase(EventType.UNSUBSCRIBE.toString())) {
+			if (null != existUser) {
+				existUser.setSubscribe(false);
+				existUser.setSubscribeTime(new Date());
+				ServiceUtils.getUserservice().saveUser(existUser);
+			}
 		}
 	}
 }

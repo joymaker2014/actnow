@@ -47,6 +47,7 @@
     <jpa:repositories base-package="com.jm.dao"/>
        
 	<context:component-scan base-package="com.jm.controller" />
+	<context:component-scan base-package="com.jm.service" />
 	
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">

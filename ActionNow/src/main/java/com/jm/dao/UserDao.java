@@ -15,6 +15,6 @@ import com.jm.model.User;
  * 
  */
 public interface UserDao extends CrudRepository<User, String> {
-	@Query("select u from User u order by u.name desc")
-	public List<User> findOrderByNameDesc();
+	@Query("select u from User u order by u.nickname desc")
+	public List<User> findOrderByNicknameDesc();
 }

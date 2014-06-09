@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.jm.constants.EventStatus;
 
 /**
  * @author LuZheqi
@@ -42,6 +45,9 @@ public class OriginalEvent {
 	private String time;
 
 	private ArrayList<String> details;
+
+	@Transient
+	private EventStatus status;
 
 	/**
 	 * @return the id
@@ -206,5 +212,20 @@ public class OriginalEvent {
 	 */
 	public void setDetails(ArrayList<String> details) {
 		this.details = details;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public EventStatus getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status
+	 *            the status to set
+	 */
+	public void setStatus(EventStatus status) {
+		this.status = status;
 	}
 }

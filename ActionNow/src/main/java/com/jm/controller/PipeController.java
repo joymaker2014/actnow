@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.xml.sax.InputSource;
 
 import com.jm.communication.response.NullResponse;
+import com.jm.communication.session.EventSession;
 import com.jm.communication.session.TextSession;
 import com.jm.constants.MessageType;
 
@@ -72,7 +73,7 @@ public class PipeController {
 			Element root = doc.getRootElement();// 指向根节点
 			List<Element> elements = root.getChildren();
 			Map<String, String> datas = new HashMap<String, String>();
-			for(Element element : elements){
+			for (Element element : elements) {
 				datas.put(element.getName(), element.getText());
 			}
 
@@ -82,7 +83,9 @@ public class PipeController {
 			String responseStr = NullResponse.createNullTextResponse(
 					fromUserName, toUserName);
 			if (MessageType.Text.toString().equalsIgnoreCase(msgType)) {
-				responseStr = new TextSession().execute(datas);
+				responseStr = new TextSession(datas).execute();
+			} else if (MessageType.Event.toString().equalsIgnoreCase(msgType)) {
+				responseStr = new EventSession(datas).execute();
 			}
 			return responseStr;
 		} catch (JDOMException e) {

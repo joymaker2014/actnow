@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public List<User> findUserOrderByNicknameDesc() {
-		return userDao.findOrderByNameDesc();
+		return userDao.findOrderByNicknameDesc();
 	}
 
 }
