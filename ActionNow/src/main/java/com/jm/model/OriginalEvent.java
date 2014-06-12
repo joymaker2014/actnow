@@ -4,12 +4,15 @@
 package com.jm.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.jm.constants.EventStatus;
@@ -42,7 +45,8 @@ public class OriginalEvent {
 
 	private double latitude;
 
-	private String time;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date time;
 
 	private ArrayList<String> details;
 
@@ -187,7 +191,7 @@ public class OriginalEvent {
 	/**
 	 * @return the time
 	 */
-	public String getTime() {
+	public Date getTime() {
 		return time;
 	}
 
@@ -195,7 +199,7 @@ public class OriginalEvent {
 	 * @param time
 	 *            the time to set
 	 */
-	public void setTime(String time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 
