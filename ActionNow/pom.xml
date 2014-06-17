@@ -161,18 +161,45 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
-			<version>4.3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
+			<artifactId>httpclient</artifactId>
 			<version>4.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-redis</artifactId>
 			<version>1.0.0.RELEASE</version>
+		</dependency>
+		
+		<dependency>  
+			<groupId>org.codehaus.jackson</groupId>  
+		    <artifactId>jackson-core-lgpl</artifactId>  
+		    <version>1.9.6</version>  
+		</dependency>  
+		<dependency>  
+			<groupId>org.codehaus.jackson</groupId>  
+		    <artifactId>jackson-core-asl</artifactId>  
+		    <version>1.9.4</version>  
+		</dependency>  
+		<dependency>  
+			<groupId>org.codehaus.jackson</groupId>  
+		    <artifactId>jackson-mapper-asl</artifactId>  
+		    <version>1.9.5</version>  
+		</dependency>  
+		<dependency>  
+		    <groupId>org.codehaus.jackson</groupId>  
+		    <artifactId>jackson-mapper-lgpl</artifactId>  
+		    <version>1.9.6</version>  
+		</dependency> 
+		<dependency>    
+		    <groupId>net.sf.json-lib</groupId>    
+		    <artifactId>json-lib</artifactId>    
+		    <version>2.4</version>    
+		    <classifier>jdk15</classifier>    
+		</dependency> 
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.41</version>
 		</dependency>
 	</dependencies>	
 	

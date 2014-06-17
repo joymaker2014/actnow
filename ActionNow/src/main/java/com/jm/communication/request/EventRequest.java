@@ -20,7 +20,7 @@ import com.jm.util.ServiceUtils;
  */
 public class EventRequest {
 
-	public void handle(Map<String, String> datas) {
+	public String handle(Map<String, String> datas) {
 		String eventType = CommonUtils
 				.getRequestValue(datas, RequestKeys.EVENT);
 		String openid = datas.get(RequestKeys.FROMUSERNAME.toString());
@@ -54,12 +54,15 @@ public class EventRequest {
 				}
 			}
 			ServiceUtils.getUserservice().saveUser(existUser);
+			return EventType.SUBSCRIBE.toString();
 		} else if (eventType.equalsIgnoreCase(EventType.UNSUBSCRIBE.toString())) {
 			if (null != existUser) {
 				existUser.setSubscribe(false);
 				existUser.setSubscribeTime(new Date());
 				ServiceUtils.getUserservice().saveUser(existUser);
 			}
+			return EventType.UNSUBSCRIBE.toString();
 		}
+		return null;
 	}
 }

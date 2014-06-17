@@ -7,8 +7,6 @@ import java.util.Map;
 
 import com.jm.communication.request.EventRequest;
 import com.jm.communication.response.EventResponse;
-import com.jm.communication.response.NullResponse;
-import com.jm.constants.request.RequestKeys;
 
 /**
  * @author LuZheqi
@@ -24,10 +22,8 @@ public class EventSession {
 	}
 
 	public String execute() {
-		String toUserName = _datas.get(RequestKeys.TOUSERNAME.toString());
-		String fromUserName = _datas.get(RequestKeys.FROMUSERNAME.toString());
-		eventRequest.handle(_datas);
-		return NullResponse.createNullTextResponse(fromUserName, toUserName);
+		String result = eventRequest.handle(_datas);
+		return eventResponse.createResponse(result, _datas);
 	}
 
 }

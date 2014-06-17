@@ -5,7 +5,6 @@ package com.jm.communication.request;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -52,10 +51,11 @@ public class TextRequest {
 		} else if (event.getStatus().equals(EventStatus.STARTTING)) {
 			return EventStatus.STARTTING.toString();
 		} else if (event.getStatus().equals(EventStatus.BASICOK)) {
-			List<String> details = event.getDetails();
+			ArrayList<String> details = event.getDetails();
 			if (null == details) {
 				details = new ArrayList<String>();
 			}
+			event.setDetails(details);
 			details.add(content);
 			return TextContents.RECEIVE_OK.toString();
 		}

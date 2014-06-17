@@ -15,7 +15,7 @@ import com.jm.util.ResponseUtils;
  * @author LuZheqi
  * 
  */
-public class TextResponse {
+public class LocationResponse {
 
 	public String createResponse(String result, Map<String, String> datas) {
 		String toUserName = datas.get(RequestKeys.TOUSERNAME.toString());
@@ -32,8 +32,6 @@ public class TextResponse {
 					"http://127.0.0.1:8080/"));
 			sb.append("submit.jsp?openid=" + fromUserName + "\">点击这里</a>");
 			text = sb.toString();
-		} else if (result.equalsIgnoreCase(TextContents.EVENT_END.toString())) {
-			text = result;
 		} else if (result.equalsIgnoreCase(TextContents.RECEIVE_OK.toString())) {
 			text = result;
 		}

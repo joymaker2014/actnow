@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Address>
+	<Province name="北京市" index="01">
+		<City name="朝阳区" index="01">
+			<County name = "亚运村" index="01" />
+			<County name = "望京" index="02" />
+			<County name = "国贸" index="03" />
+			<County name = "亮马桥" index="04" />
+			<County name = "三元桥" index="05" />
+			<County name = "大望路" index="06" />
+			<County name = "三里屯" index="07" />
+			<County name = "双井" index="08" />
+			<County name = "劲松" index="09" />
+			<County name = "潘家园" index="10" />
+		</City>
+		<City name="海淀区" index="02">
+			<County name = "中关村" index="01" />
+			<County name = "五道口" index="02" />
+			<County name = "公主坟" index="03" />
+			<County name = "万寿路" index="04" />
+		</City>
+		<City name="西城区" index="03"></City>
+		<City name="东城区" index="04"></City>
+		<City name="丰台区" index="05"></City>
+		<City name="石景山区" index="06"></City>
+		<City name="门头沟区" index="07"></City>
+		<City name="房山区" index="08"></City>
+		<City name="通州区" index="09"></City>
+		<City name="大兴区" index="10"></City>
+		<City name="顺义区" index="11"></City>
+		<City name="怀柔区" index="12"></City>
+		<City name="密云区" index="13"></City>
+		<City name="昌平区" index="14"></City>
+		<City name="平谷区" index="15"></City>
+		<City name="延庆区" index="16"></City>
+		<City name="怀柔区" index="17"></City>
+	</Province>
+
+</Address>

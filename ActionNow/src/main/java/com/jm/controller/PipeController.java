@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.xml.sax.InputSource;
 
-import com.jm.communication.response.NullResponse;
 import com.jm.communication.session.EventSession;
 import com.jm.communication.session.TextSession;
 import com.jm.constants.MessageType;
+import com.jm.util.ResponseUtils;
 
 /**
  * @author LuZheqi
@@ -80,8 +80,8 @@ public class PipeController {
 			String msgType = root.getChild("MsgType").getText();
 			String toUserName = root.getChild("ToUserName").getText();
 			String fromUserName = root.getChild("FromUserName").getText();
-			String responseStr = NullResponse.createNullTextResponse(
-					fromUserName, toUserName);
+			String responseStr = ResponseUtils.createTextResponse(fromUserName,
+					toUserName, null);
 			if (MessageType.Text.toString().equalsIgnoreCase(msgType)) {
 				responseStr = new TextSession(datas).execute();
 			} else if (MessageType.Event.toString().equalsIgnoreCase(msgType)) {
