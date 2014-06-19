@@ -12,8 +12,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.jm.model.codes.Sex;
-
 /**
  * @author LuZheqi
  * 
@@ -31,7 +29,7 @@ public class User implements Serializable {
 	private String openid;
 	private boolean subscribe;
 	private String nickname;
-	private Sex sex;
+	private int sex;
 	private String city;
 	private String country;
 	private String province;
@@ -96,7 +94,7 @@ public class User implements Serializable {
 	/**
 	 * @return the sex
 	 */
-	public Sex getSex() {
+	public int getSex() {
 		return sex;
 	}
 
@@ -104,7 +102,7 @@ public class User implements Serializable {
 	 * @param sex
 	 *            the sex to set
 	 */
-	public void setSex(Sex sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 

@@ -20,7 +20,7 @@ import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.jm.https.TrustAnyTrustManager;
+import com.jm.client.https.TrustAnyTrustManager;
 
 
 /**

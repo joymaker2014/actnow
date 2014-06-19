@@ -41,5 +41,5 @@ public interface UserService {
 	 */
 	void deleteUserById(String id);
 
-	List<User> findUserOrderByNicknameDesc();
+	List<User> findUserOrderByNicknameLikeUserDesc();
 }
