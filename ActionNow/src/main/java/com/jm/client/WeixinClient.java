@@ -118,22 +118,27 @@ public class WeixinClient {
 		btn13.setKey("13");
 
 		CommonButton btn21 = new CommonButton();
-		btn21.setName("奖品信息");
+		btn21.setName("积分信息");
 		btn21.setType("click");
 		btn21.setKey("21");
 
 		CommonButton btn22 = new CommonButton();
-		btn22.setName("兑换奖品");
+		btn22.setName("奖品信息");
 		btn22.setType("click");
 		btn22.setKey("22");
+
+		CommonButton btn23 = new CommonButton();
+		btn23.setName("兑换奖品");
+		btn23.setType("click");
+		btn23.setKey("23");
 
 		ComplexButton mainBtn1 = new ComplexButton();
 		mainBtn1.setName("身边的事");
 		mainBtn1.setSub_button(new CommonButton[] { btn11, btn12, btn13, });
 
 		ComplexButton mainBtn2 = new ComplexButton();
-		mainBtn2.setName("奖品兑换");
-		mainBtn2.setSub_button(new CommonButton[] { btn21, btn22 });
+		mainBtn2.setName("积分奖品");
+		mainBtn2.setSub_button(new CommonButton[] { btn21, btn22, btn23 });
 
 		Menu menu = new Menu();
 		menu.setButton(new Button[] { mainBtn1, mainBtn2 });
