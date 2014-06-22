@@ -4,6 +4,7 @@
 	<HEAD>
 		<META lang="UTF-8" http-equiv=Content-Type content="text/html">
 		<script type="text/javascript" src="jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="my.js"></script>
 	</HEAD>
 	<BODY>
