@@ -1,8 +1,8 @@
-var appDomain="/actnow";
+var appDomain="/actionnow/actnow";
 
 function queryString(key)
 {
-    var regex_str = "^.+\\?.*?\\b"+ key +"=(.*?)(?:(?=&)|$|#)"
+    var regex_str = "^.+\\?.*?\\b"+ key +"=(.*?)(?:(?=&)|$|#)";
     var regex = new RegExp(regex_str,"i");
     var url = window.location.toString();
     if(regex.test(url)) return RegExp.$1;
@@ -353,7 +353,7 @@ function submit(){
 	}); 
 }
 function cancel(){
-	window.top.opener = null
+	window.top.opener = null;
 	//window.open('','_self');
 	window.close();
 	WeixinJSBridge.call('closeWindow');

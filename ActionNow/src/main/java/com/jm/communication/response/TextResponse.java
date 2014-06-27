@@ -20,9 +20,9 @@ public class TextResponse {
 	public String createResponse(String result, Map<String, String> datas) {
 		String toUserName = datas.get(RequestKeys.TOUSERNAME.toString());
 		String fromUserName = datas.get(RequestKeys.FROMUSERNAME.toString());
-		String text = null;
+		String text = result;
 		if (null == result) {
-			text = TextContents.MENU_ROOT.toString();
+			text = TextContents.WELCOME.toString();
 		} else if (result.equals(EventStatus.STARTTING.toString())) {
 			StringBuilder sb = new StringBuilder(
 					TextContents.SUBMIT_BASIC.toString());
@@ -32,10 +32,6 @@ public class TextResponse {
 					"http://127.0.0.1:8080/"));
 			sb.append("submit.jsp?openid=" + fromUserName + "\">点击这里</a>");
 			text = sb.toString();
-		} else if (result.equalsIgnoreCase(TextContents.EVENT_END.toString())) {
-			text = result;
-		} else if (result.equalsIgnoreCase(TextContents.RECEIVE_OK.toString())) {
-			text = result;
 		}
 		return ResponseUtils.createTextResponse(fromUserName, toUserName, text);
 	}
