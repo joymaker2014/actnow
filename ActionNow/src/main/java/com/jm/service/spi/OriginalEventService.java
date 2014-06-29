@@ -3,6 +3,8 @@
  */
 package com.jm.service.spi;
 
+import java.util.List;
+
 import com.jm.model.OriginalEvent;
 
 /**
@@ -18,4 +20,7 @@ public interface OriginalEventService {
 	void updateOriginalEvent(OriginalEvent originalEvent);
 
 	void deleteOriginalEventById(String id);
+	
+	List<OriginalEvent> getSimilarEvents(int category, int type,
+			int district, int businessCircle);
 }

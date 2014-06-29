@@ -31,7 +31,7 @@ public class EventRequest {
 		String eventType = CommonUtils
 				.getRequestValue(datas, RequestKeys.EVENT);
 		String openid = datas.get(RequestKeys.FROMUSERNAME.toString());
-		User existUser = ServiceUtils.getUserservice().findUserById(openid);
+		User existUser = ServiceUtils.getUserService().findUserById(openid);
 		if (eventType.equalsIgnoreCase(EventType.SUBSCRIBE.toString())) {
 			if (null != existUser) {
 				existUser.setSubscribe(true);
@@ -39,13 +39,13 @@ public class EventRequest {
 			} else {
 				existUser = WeixinClient.getUserInfo(openid);
 			}
-			ServiceUtils.getUserservice().saveUser(existUser);
+			ServiceUtils.getUserService().saveUser(existUser);
 			return EventType.SUBSCRIBE.toString();
 		} else if (eventType.equalsIgnoreCase(EventType.UNSUBSCRIBE.toString())) {
 			if (null != existUser) {
 				existUser.setSubscribe(false);
 				existUser.setSubscribeTime(new Date());
-				ServiceUtils.getUserservice().saveUser(existUser);
+				ServiceUtils.getUserService().saveUser(existUser);
 			}
 			return EventType.UNSUBSCRIBE.toString();
 		} else if (eventType.equalsIgnoreCase(EventType.CLICK.toString())) {
@@ -58,8 +58,9 @@ public class EventRequest {
 					OriginalEvent oevent = new OriginalEvent();
 					oevent.setId(UUID.randomUUID().toString());
 					oevent.setStatus(EventStatus.STARTTING);
-					oevent.setUser(ServiceUtils.getUserservice().findUserById(
+					oevent.setUser(ServiceUtils.getUserService().findUserById(
 							openid));
+					oevent.setTime(new Date());
 					EventCacheManager.getInstance().getCache()
 							.put(openid, oevent);
 					new EventTimeoutTask(new EventTimeoutClient(openid,
@@ -73,8 +74,7 @@ public class EventRequest {
 				if (null == event) {
 					return TextContents.PLAESE_END_EVENT.toString();
 				} else {
-					event.setTime(new Date());
-					ServiceUtils.getOriginaleventservice().saveOriginalEvent(
+					ServiceUtils.getOriginalEventService().saveOriginalEvent(
 							event);
 					EventCacheManager.getInstance().getCache()
 							.invalidate(openid);

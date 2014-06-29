@@ -36,7 +36,7 @@ public class EventTimeoutClient implements TimeoutClient {
 			return;
 		}
 		event.setTime(new Date());
-		ServiceUtils.getOriginaleventservice().saveOriginalEvent(event);
+		ServiceUtils.getOriginalEventService().saveOriginalEvent(event);
 		EventCacheManager.getInstance().getCache().invalidate(_openid);
 	}
 

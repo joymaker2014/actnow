@@ -66,7 +66,7 @@ public class WeixinClient {
 				user.setHeadImageUrl(object.getString("headimgurl"));
 				user.setSubscribeTime(object.getDate("subscribe_time"));
 			} else {
-				List<User> users = ServiceUtils.getUserservice()
+				List<User> users = ServiceUtils.getUserService()
 						.findUserOrderByNicknameLikeUserDesc();
 				user.setNickname("user1");
 				user.setCity("北京市");
