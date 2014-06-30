@@ -84,6 +84,20 @@ public class EventRequest {
 			} else if (eventKey.equalsIgnoreCase(EventKey.ROOT_QUERY_EVENT
 					.toString())) {
 				return TextContents.DEVELOPING.toString();
+			} else if (eventKey.equalsIgnoreCase(EventKey.CREDITS_INFO.toString())) {
+				return TextContents.DEVELOPING.toString();
+				
+			} else if (eventKey.equalsIgnoreCase(EventKey.AWARD_INFO
+					.toString())) {
+				return TextContents.DEVELOPING.toString();
+
+			}else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE
+					.toString())) {
+				return TextContents.DEVELOPING.toString();
+
+			} else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE_QUERY
+					.toString())) {
+				return TextContents.DEVELOPING.toString();
 			}
 		}
 		return null;

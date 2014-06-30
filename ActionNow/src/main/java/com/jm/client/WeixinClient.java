@@ -132,10 +132,12 @@ public class WeixinClient {
 		btn23.setType("click");
 		btn23.setKey("23");
 
+
 		CommonButton btn24 = new CommonButton();
 		btn24.setName("兑换记录");
 		btn24.setType("click");
 		btn24.setKey("24");
+
 
 		ComplexButton mainBtn1 = new ComplexButton();
 		mainBtn1.setName("身边的事");
@@ -143,7 +145,9 @@ public class WeixinClient {
 
 		ComplexButton mainBtn2 = new ComplexButton();
 		mainBtn2.setName("积分奖品");
+
 		mainBtn2.setSub_button(new CommonButton[] { btn21, btn22, btn23, btn24 });
+
 
 		Menu menu = new Menu();
 		menu.setButton(new Button[] { mainBtn1, mainBtn2 });
