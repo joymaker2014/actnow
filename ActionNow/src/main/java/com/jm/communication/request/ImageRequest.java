@@ -4,7 +4,6 @@
 package com.jm.communication.request;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
 
 import com.jm.cache.manager.EventCacheManager;
@@ -30,18 +29,22 @@ public class ImageRequest {
 		if (null != event) {
 			if (event.getStatus().equals(EventStatus.STARTTING)) {
 				return EventStatus.STARTTING.toString();
-			} else if (event.getStatus().equals(EventStatus.BASICOK)) {
-				ArrayList<String> details = event.getDetails();
-				if (null == details) {
-					details = new ArrayList<String>();
+			} else if (event.getStatus().equals(EventStatus.BASICOK)
+					|| event.getStatus().equals(EventStatus.ENDDING)) {
+				ArrayList<String> imageIds = event.getImageIds();
+				if (null == imageIds) {
+					imageIds = new ArrayList<String>();
 				}
-				event.setDetails(details);
-				details.add(datas.get(ResponseKeys.MEDIAID));
+				event.setImageIds(imageIds);
+				imageIds.add(datas.get(ResponseKeys.MEDIAID));
 				DownloadMediaTimerTask dlTask = new DownloadMediaTimerTask(
 						new OneTimeTrigger(10), event.getCategory(),
 						event.getType(), MediaType.IMAGE, event.getTime(),
 						datas.get(ResponseKeys.MEDIAID.toString()));
 				CommonConstants.downloadTimer.schedule(dlTask);
+				if (event.getStatus().equals(EventStatus.ENDDING)) {
+					event.setStatus(EventStatus.BASICOK);
+				}
 				return TextContents.RECEIVE_OK.toString();
 			}
 		}

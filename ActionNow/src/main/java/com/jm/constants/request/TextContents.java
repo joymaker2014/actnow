@@ -18,7 +18,10 @@ public enum TextContents {
 			"充值卡"), EXCHAGE_INFO(
 			"请输入您想兑换的奖品信息，输入格式为：兑换[卡金额]元[奖品类型][兑换数量]张，例如\"兑换50元超市购物卡2张\""), EXCHANGE_VALUE_WRONG(
 			"兑换金额不合法，只有20、50、100元三种面额！"), EXCHANGE_NUMBER_WRONG("没有足够数量的卡！"), EXCHANGE_OK(
-			"恭喜您，兑换成功！您兑换的结果为"), EXCHANGE_QUERY_INFO("您的兑换记录如下所示：\n\r"), CREDITS_RANKING_INFO("积分排行榜为(名次、用户id、积分)：\n\r");
+			"恭喜您，兑换成功！您兑换的结果为"), EXCHANGE_QUERY_INFO("您的兑换记录如下所示：\n\r"), CREDITS_RANKING_INFO(
+			"积分排行榜为(名次、用户id、积分)：\n\r"), BASICINFO("基本信息"), IMAGE("图片"), VOICE(
+			"语音"), LOCATION("位置"), DESCRIPTIONS("描述文字"), PROVIDE_MORE(
+			"为了提高事件处理的便利，请提交XXX信息；若不需要提交请再次点击结束事件按钮！");
 	private final String _content;
 
 	TextContents(String content) {

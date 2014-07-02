@@ -38,9 +38,10 @@
 	
 	<bean id="serviceUtils" class="com.jm.util.ServiceUtils">   
 		<property name="userService">  <ref bean="userService" /> </property>
+		<property name="userTraceService"> <ref bean="userTraceService" /> </property> 
 		<property name="originalEventService"><ref bean="originalEventService" /> </property> 
 		<property name="goodsService"><ref bean="goodsService" /> </property> 
-		<property name="exchangeRecordService"><ref bean="exchangeRecordService" /> </property> 
+		<property name="exchangeRecordService"><ref bean="exchangeRecordService" /> </property>
 	</bean>
 
 </beans>

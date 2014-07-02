@@ -4,8 +4,8 @@
 package com.jm.timer.user;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
@@ -16,7 +16,6 @@ import org.apache.http.util.EntityUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jm.client.WeixinClient;
 import com.jm.client.https.DefaultSSLSocketFactory;
 import com.jm.constants.UrlConstants;
 import com.jm.model.User;
@@ -31,6 +30,7 @@ import com.jm.util.ServiceUtils;
  */
 public class UserCheckTimerTask extends TimerTask {
 	private final String openid;
+	private static Set<String> checkedOpenIds = new HashSet<String>();
 
 	public UserCheckTimerTask(String openid) {
 		super(new OneTimeTrigger(0));
@@ -44,7 +44,13 @@ public class UserCheckTimerTask extends TimerTask {
 	 */
 	@Override
 	protected void run(long paramLong) {
+		if (checkedOpenIds.contains(openid)) {
+			return;
+		}
 		User user = ServiceUtils.getUserService().findUserById(openid);
+		if (null == user) {
+			return;
+		}
 		String regEx = "user.*";
 		boolean result = Pattern.matches(regEx, user.getNickname());
 		if (result) {
@@ -74,13 +80,15 @@ public class UserCheckTimerTask extends TimerTask {
 					user.setHeadImageUrl(object.getString("headimgurl"));
 					user.setSubscribeTime(object.getDate("subscribe_time"));
 					ServiceUtils.getUserService().updateUser(user);
+					checkedOpenIds.add(openid);
 				}
 			} catch (ClientProtocolException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
+		} else {
+			checkedOpenIds.add(openid);
 		}
 	}
 }

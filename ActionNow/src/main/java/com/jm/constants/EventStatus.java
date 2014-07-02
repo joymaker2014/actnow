@@ -9,7 +9,7 @@ package com.jm.constants;
  */
 public enum EventStatus {
 
-	GPSOK("gpsok"), STARTTING("starting"), BASICOK("basicok");
+	STARTTING("starting"), BASICOK("basicok"), ENDDING("ending");
 
 	private final String _content;
 

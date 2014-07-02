@@ -182,13 +182,17 @@ public class TextRequest {
 			return TextContents.WELCOME.toString();
 		} else if (event.getStatus().equals(EventStatus.STARTTING)) {
 			return EventStatus.STARTTING.toString();
-		} else if (event.getStatus().equals(EventStatus.BASICOK)) {
-			ArrayList<String> details = event.getDetails();
-			if (null == details) {
-				details = new ArrayList<String>();
+		} else if (event.getStatus().equals(EventStatus.BASICOK)
+				|| event.getStatus().equals(EventStatus.ENDDING)) {
+			ArrayList<String> descriptions = event.getDescriptions();
+			if (null == descriptions) {
+				descriptions = new ArrayList<String>();
 			}
-			event.setDetails(details);
-			details.add(content);
+			event.setDescriptions(descriptions);
+			descriptions.add(content);
+			if (event.getStatus().equals(EventStatus.ENDDING)) {
+				event.setStatus(EventStatus.BASICOK);
+			}
 			return TextContents.RECEIVE_OK.toString();
 		}
 

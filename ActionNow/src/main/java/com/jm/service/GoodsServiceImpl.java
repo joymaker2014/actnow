@@ -71,7 +71,6 @@ public class GoodsServiceImpl implements GoodsService {
 	public int countCardNumGroupByTypeAndValue(int type, int value) {
 		return goodsDao.countCardNumGroupByTypeAndValue(type, value);
 	}
-
 	@Override
 	@Transactional
 	public List<String> selectCardsByTypeAndValue(int type, int value) {

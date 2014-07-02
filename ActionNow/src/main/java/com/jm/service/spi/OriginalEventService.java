@@ -20,7 +20,9 @@ public interface OriginalEventService {
 	void updateOriginalEvent(OriginalEvent originalEvent);
 
 	void deleteOriginalEventById(String id);
-	
-	List<OriginalEvent> getSimilarEvents(int category, int type,
-			int district, int businessCircle);
+
+	List<OriginalEvent> getSimilarEvents(int category, int type, int district,
+			int businessCircle);
+
+	List<OriginalEvent> getEvents(String openid);
 }

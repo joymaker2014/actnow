@@ -15,6 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.jm.constants.EventStatus;
 
 /**
@@ -27,6 +29,7 @@ public class OriginalEvent {
 	@Id
 	private String id;
 
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "openid")
 	private User user;
@@ -48,7 +51,11 @@ public class OriginalEvent {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;
 
-	private ArrayList<String> details;
+	private ArrayList<String> voiceIds;
+
+	private ArrayList<String> imageIds;
+
+	private ArrayList<String> descriptions;
 
 	@Transient
 	private EventStatus status;
@@ -204,18 +211,18 @@ public class OriginalEvent {
 	}
 
 	/**
-	 * @return the details
+	 * @return the descriptions
 	 */
-	public ArrayList<String> getDetails() {
-		return details;
+	public ArrayList<String> getDescriptions() {
+		return descriptions;
 	}
 
 	/**
-	 * @param details
-	 *            the details to set
+	 * @param descriptions
+	 *            the descriptions to set
 	 */
-	public void setDetails(ArrayList<String> details) {
-		this.details = details;
+	public void setDescriptions(ArrayList<String> descriptions) {
+		this.descriptions = descriptions;
 	}
 
 	/**
@@ -231,5 +238,35 @@ public class OriginalEvent {
 	 */
 	public void setStatus(EventStatus status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the voiceIds
+	 */
+	public ArrayList<String> getVoiceIds() {
+		return voiceIds;
+	}
+
+	/**
+	 * @param voiceIds
+	 *            the voiceIds to set
+	 */
+	public void setVoiceIds(ArrayList<String> voiceIds) {
+		this.voiceIds = voiceIds;
+	}
+
+	/**
+	 * @return the imageIds
+	 */
+	public ArrayList<String> getImageIds() {
+		return imageIds;
+	}
+
+	/**
+	 * @param imageIds
+	 *            the imageIds to set
+	 */
+	public void setImageIds(ArrayList<String> imageIds) {
+		this.imageIds = imageIds;
 	}
 }

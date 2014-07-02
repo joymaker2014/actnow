@@ -76,11 +76,17 @@ public class OriginalEventServiceImpl implements OriginalEventService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<OriginalEvent> getSimilarEvents(int category, int type,
 			int district, int businessCircle) {
 		return originalEventDao.findSimilarEvents(category, type, district,
 				businessCircle);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<OriginalEvent> getEvents(String openid) {
+		return (List<OriginalEvent>) originalEventDao.findEvents(openid);
 	}
 
 }

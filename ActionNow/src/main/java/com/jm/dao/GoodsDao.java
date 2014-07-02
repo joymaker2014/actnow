@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.jm.model.Goods;
-import com.jm.model.User;
 
 /**
  * @author LuZheqi
@@ -27,5 +26,5 @@ public interface GoodsDao extends CrudRepository<Goods, String> {
 	
 	@Query("delete from Goods g where g.cardNum = ?1")
 	public int deleteCoodsByCardNum(int cardNum);
-	
+
 }
