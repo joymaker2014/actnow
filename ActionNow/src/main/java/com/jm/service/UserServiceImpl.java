@@ -73,4 +73,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.findOrderByNicknameDesc();
 	}
 
+	@Override
+	@Transactional
+	public List<User> findOrderByCreditDesc(){
+		return userDao.findOrderByCreditDesc();
+	}
 }

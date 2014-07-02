@@ -3,6 +3,8 @@
  */
 package com.jm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,6 +70,25 @@ public class GoodsServiceImpl implements GoodsService {
 	@Transactional
 	public int countCardNumGroupByTypeAndValue(int type, int value) {
 		return goodsDao.countCardNumGroupByTypeAndValue(type, value);
+	}
+
+	@Override
+	@Transactional
+	public List<String> selectCardsByTypeAndValue(int type, int value) {
+		return goodsDao.selectCardsByTypeAndValue(type, value);
+	}
+
+	@Override
+	@Transactional
+	public Goods selectCoodsByCardNum(int cardNum) {
+		return goodsDao.selectCoodsByCardNum(cardNum);
+	}
+	
+	@Override
+	@Transactional
+	public int deleteCoodsByCardNum(int cardNum){
+		goodsDao.deleteCoodsByCardNum(cardNum);
+		return 0;
 	}
 
 }

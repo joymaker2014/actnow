@@ -42,4 +42,6 @@ public interface UserService {
 	void deleteUserById(String id);
 
 	List<User> findUserOrderByNicknameLikeUserDesc();
+	
+	List<User> findOrderByCreditDesc();
 }

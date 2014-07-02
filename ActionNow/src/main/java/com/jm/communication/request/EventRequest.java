@@ -4,6 +4,7 @@
 package com.jm.communication.request;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import com.jm.constants.EventType;
 import com.jm.constants.GoodsType;
 import com.jm.constants.request.RequestKeys;
 import com.jm.constants.request.TextContents;
+import com.jm.model.ExchangeRecord;
 import com.jm.model.Goods;
 import com.jm.model.OriginalEvent;
 import com.jm.model.User;
@@ -103,58 +105,58 @@ public class EventRequest {
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										20) + " 张\n\r");
+										Integer.parseInt(GoodsType.SHOPPING_CARD
+												.toString()), 20) + " 张\n\r");
 				sb.append("\t\t50元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										50) + " 张\n\r");
+										Integer.parseInt(GoodsType.SHOPPING_CARD
+												.toString()), 50) + " 张\n\r");
 				sb.append("\t\t100元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										100) + " 张\n\r");
+										Integer.parseInt(GoodsType.SHOPPING_CARD
+												.toString()), 100) + " 张\n\r");
 				sb.append("2. " + TextContents.TRANSPORT_CARD + ":\n\r");
 				sb.append("\t\t20元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										20) + " 张\n\r");
+										Integer.parseInt(GoodsType.TRANSPORT_CARD
+												.toString()), 20) + " 张\n\r");
 				sb.append("\t\t50元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										50) + " 张\n\r");
+										Integer.parseInt(GoodsType.TRANSPORT_CARD
+												.toString()), 50) + " 张\n\r");
 				sb.append("\t\t100元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										100) + " 张\n\r");
+										Integer.parseInt(GoodsType.TRANSPORT_CARD
+												.toString()), 100) + " 张\n\r");
 				sb.append("3. " + TextContents.TELEPHONE_CARD + ":\n\r");
 				sb.append("\t\t20元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										20) + " 张\n\r");
+										Integer.parseInt(GoodsType.TELEPHONE_CARD
+												.toString()), 20) + " 张\n\r");
 				sb.append("\t\t50元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										50) + " 张\n\r");
+										Integer.parseInt(GoodsType.TELEPHONE_CARD
+												.toString()), 50) + " 张\n\r");
 				sb.append("\t\t100元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										100) + " 张\n\r");
+										Integer.parseInt(GoodsType.TELEPHONE_CARD
+												.toString()), 100) + " 张\n\r");
 				return sb.toString();
 
 			} else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE.toString())) {
@@ -165,67 +167,93 @@ public class EventRequest {
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										20) + " 张\n\r");
+										Integer.parseInt(GoodsType.SHOPPING_CARD
+												.toString()), 20) + " 张\n\r");
 				sb.append("\t\t50元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										50) + " 张\n\r");
+										Integer.parseInt(GoodsType.SHOPPING_CARD
+												.toString()), 50) + " 张\n\r");
 				sb.append("\t\t100元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										100) + " 张\n\r");
+										Integer.parseInt(GoodsType.SHOPPING_CARD
+												.toString()), 100) + " 张\n\r");
 				sb.append("2. " + TextContents.TRANSPORT_CARD + ":\n\r");
 				sb.append("\t\t20元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										20) + " 张\n\r");
+										Integer.parseInt(GoodsType.TRANSPORT_CARD
+												.toString()), 20) + " 张\n\r");
 				sb.append("\t\t50元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										50) + " 张\n\r");
+										Integer.parseInt(GoodsType.TRANSPORT_CARD
+												.toString()), 50) + " 张\n\r");
 				sb.append("\t\t100元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										100) + " 张\n\r");
+										Integer.parseInt(GoodsType.TRANSPORT_CARD
+												.toString()), 100) + " 张\n\r");
 				sb.append("3. " + TextContents.TELEPHONE_CARD + ":\n\r");
 				sb.append("\t\t20元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										20) + " 张\n\r");
+										Integer.parseInt(GoodsType.TELEPHONE_CARD
+												.toString()), 20) + " 张\n\r");
 				sb.append("\t\t50元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										50) + " 张\n\r");
+										Integer.parseInt(GoodsType.TELEPHONE_CARD
+												.toString()), 50) + " 张\n\r");
 				sb.append("\t\t100元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										100) + " 张\n\r");
+										Integer.parseInt(GoodsType.TELEPHONE_CARD
+												.toString()), 100) + " 张\n\r");
 				sb.append(TextContents.EXCHAGE_INFO.toString());
 				return sb.toString();
 
 			} else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE_QUERY
 					.toString())) {
-				return TextContents.DEVELOPING.toString();
+				StringBuffer sb = new StringBuffer();
+				sb.append(TextContents.EXCHANGE_QUERY_INFO);
+				List<ExchangeRecord> exchangeRecords = ServiceUtils
+						.getExchangeRecordService().findExchangeRecordByOpenid(
+								openid);
+				for (int i = 0; i < exchangeRecords.size(); i++) {
+					sb.append("日期：" + exchangeRecords.get(i).getExchangeDate()
+							+ "\t");
+					int type = exchangeRecords.get(i).getType();
+					String tmp = (type == 1) ? TextContents.SHOPPING_CARD
+							.toString()
+							: ((type == 2) ? TextContents.TRANSPORT_CARD
+									.toString() : TextContents.TELEPHONE_CARD
+									.toString());
+					sb.append("卡类型：" + tmp + "\t");
+					sb.append("卡面值：" + exchangeRecords.get(i).getValue() + "\t");
+					sb.append("\n\r");
+				}
+				return sb.toString();
 			} else if (eventKey.equalsIgnoreCase(EventKey.CREDITS_RANKING_LIST
 					.toString())) {
-				return TextContents.DEVELOPING.toString();
+				StringBuffer sb = new StringBuffer();
+				sb.append(TextContents.CREDITS_RANKING_INFO);
+				List<User> users = ServiceUtils.getUserService()
+						.findOrderByCreditDesc();
+				for (int i = 0; i < users.size(); i++) {
+					sb.append("第" + (i + 1) + "名： " + users.get(i).getOpenid()
+							+ "\t" + users.get(i).getCredit() + "\n\r");
+				}
+				return sb.toString();
 			} else if (eventKey.equalsIgnoreCase(EventKey.ADD_CREDITS
 					.toString())) {
 				long tmp = CommonUtils.changeCredits(openid, 100);

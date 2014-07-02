@@ -3,6 +3,8 @@
  */
 package com.jm.util;
 
+import com.jm.model.ExchangeRecord;
+import com.jm.service.spi.ExchangeRecordService;
 import com.jm.service.spi.GoodsService;
 import com.jm.service.spi.OriginalEventService;
 import com.jm.service.spi.UserService;
@@ -15,6 +17,16 @@ public class ServiceUtils {
 	private static UserService userService;
 	private static OriginalEventService originalEventService;
 	private static GoodsService goodsService;
+	private static ExchangeRecordService exchangeRecordService;
+
+	public static ExchangeRecordService getExchangeRecordService() {
+		return exchangeRecordService;
+	}
+
+	public static void setExchangeRecordService(
+			ExchangeRecordService exchangeRecordService) {
+		ServiceUtils.exchangeRecordService = exchangeRecordService;
+	}
 
 	public static GoodsService getGoodsService() {
 		return goodsService;
