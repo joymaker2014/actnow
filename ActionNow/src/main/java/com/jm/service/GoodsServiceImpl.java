@@ -68,12 +68,12 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	@Transactional
-	public int countCardNumGroupByTypeAndValue(int type, int value) {
+	public long countCardNumGroupByTypeAndValue(int type, int value) {
 		return goodsDao.countCardNumGroupByTypeAndValue(type, value);
 	}
 	@Override
 	@Transactional
-	public List<String> selectCardsByTypeAndValue(int type, int value) {
+	public List<Integer> selectCardsByTypeAndValue(int type, int value) {
 		return goodsDao.selectCardsByTypeAndValue(type, value);
 	}
 
@@ -81,13 +81,5 @@ public class GoodsServiceImpl implements GoodsService {
 	@Transactional
 	public Goods selectCoodsByCardNum(int cardNum) {
 		return goodsDao.selectCoodsByCardNum(cardNum);
-	}
-	
-	@Override
-	@Transactional
-	public int deleteCoodsByCardNum(int cardNum){
-		goodsDao.deleteCoodsByCardNum(cardNum);
-		return 0;
-	}
-
+	}	
 }

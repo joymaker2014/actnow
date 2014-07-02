@@ -16,6 +16,7 @@ import com.jm.constants.request.TextContents;
 import com.jm.model.ExchangeRecord;
 import com.jm.model.Goods;
 import com.jm.model.OriginalEvent;
+import com.jm.model.User;
 import com.jm.util.CommonUtils;
 import com.jm.util.ServiceUtils;
 
@@ -26,6 +27,7 @@ import com.jm.util.ServiceUtils;
 public class TextRequest {
 	public String handle(Map<String, String> datas) {
 		String openid = datas.get(RequestKeys.FROMUSERNAME.toString());
+		User user = ServiceUtils.getUserService().findUserById(openid);
 		OriginalEvent event = EventCacheManager.getInstance().getCache()
 				.get(openid);
 		String content = datas.get(RequestKeys.CONTENT.toString());
@@ -33,9 +35,9 @@ public class TextRequest {
 		if (tmp.startsWith("兑换")) {
 			if (tmp.contains(TextContents.SHOPPING_CARD_MINI.toString())) {
 				/* get the number of the card */
-				int value = Integer.parseInt(tmp.substring(tmp.indexOf("兑换"),
+				int value = Integer.parseInt(tmp.substring(tmp.indexOf("兑换")+2,
 						tmp.indexOf("元")));
-				if ((value != 20) || (value != 50) || (value != 100)) {
+				if ((value != 20) && (value != 50) && (value != 100)) {
 					return TextContents.EXCHANGE_VALUE_WRONG.toString();
 				}
 				int index1 = tmp.indexOf(TextContents.SHOPPING_CARD_MINI
@@ -46,8 +48,15 @@ public class TextRequest {
 				int exchangeNum = Integer.parseInt(tmp2);
 
 				/* db operation */
-				CommonUtils.changeCredits(openid, (-1) * value);
-				List<String> cardNums = ServiceUtils.getGoodsService()
+				if(user.getCredit() < value * exchangeNum){
+					String result = TextContents.EXCHANGE_CREDIT_WRONG
+							.toString()
+							+ "目前可用积分为："
+							+ user.getCredit();
+					return result;
+				}
+				
+				List<Integer> cardNums = ServiceUtils.getGoodsService()
 						.selectCardsByTypeAndValue(
 								Integer.parseInt(GoodsType.SHOPPING_CARD
 										.toString()), value);
@@ -57,6 +66,8 @@ public class TextRequest {
 							+ "目前只有"
 							+ cardNums.size()
 							+ "张"
+							+ value
+							+ "元"
 							+ TextContents.SHOPPING_CARD.toString();
 					return result;
 				}
@@ -66,25 +77,29 @@ public class TextRequest {
 						+ ",卡号和密码如下：\n\r");
 				for (int i = 0; i < exchangeNum; i++) {
 					Goods goods = ServiceUtils.getGoodsService()
-							.selectCoodsByCardNum(
-									Integer.parseInt(cardNums.get(i)));
+							.selectCoodsByCardNum(cardNums.get(i));
 					sb.append("卡号：" + goods.getCardNum() + "密码："
 							+ goods.getCardPwd() + "\n\r");
 					ExchangeRecord exchangeRecord = new ExchangeRecord();
+					exchangeRecord.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 					exchangeRecord.setOpenid(openid);
 					exchangeRecord.setCardNum(goods.getCardNum());
 					exchangeRecord.setCardPwd(goods.getCardPwd());
 					exchangeRecord.setExchangeDate((new Date()).toString());
 					exchangeRecord.setType(goods.getType());
 					exchangeRecord.setValue(goods.getValue());
+					CommonUtils.changeCredits(openid, (-1) * value);
 					ServiceUtils.getExchangeRecordService().saveExchangeRecord(exchangeRecord);
-					ServiceUtils.getGoodsService().deleteCoodsByCardNum(Integer.parseInt(cardNums.get(i)));
+					ServiceUtils.getGoodsService().deleteGoodsById(goods.getId());
 				}
 				return sb.toString();
 			}
 			if (tmp.contains(TextContents.TRANSPORT_CARD_MINI.toString())) {
-				int value = Integer.parseInt(tmp.substring(tmp.indexOf("兑换"),
+				int value = Integer.parseInt(tmp.substring(tmp.indexOf("兑换")+2,
 						tmp.indexOf("元")));
+				if ((value != 20) && (value != 50) && (value != 100)) {
+					return TextContents.EXCHANGE_VALUE_WRONG.toString();
+				}
 				int index1 = tmp.indexOf(TextContents.TRANSPORT_CARD_MINI
 						.toString());
 				int index2 = tmp.indexOf("张");
@@ -93,8 +108,14 @@ public class TextRequest {
 				int exchangeNum = Integer.parseInt(tmp2);
 
 				/* db operation */
-				CommonUtils.changeCredits(openid, (-1) * value);
-				List<String> cardNums = ServiceUtils.getGoodsService()
+				if(user.getCredit() < value * exchangeNum){
+					String result = TextContents.EXCHANGE_CREDIT_WRONG
+							.toString()
+							+ "目前可用积分为："
+							+ user.getCredit();
+					return result;
+				}
+				List<Integer> cardNums = ServiceUtils.getGoodsService()
 						.selectCardsByTypeAndValue(
 								Integer.parseInt(GoodsType.TRANSPORT_CARD
 										.toString()), value);
@@ -104,6 +125,8 @@ public class TextRequest {
 							+ "目前只有"
 							+ cardNums.size()
 							+ "张"
+							+ value
+							+ "元"
 							+ TextContents.TRANSPORT_CARD.toString();
 					return result;
 				}
@@ -113,25 +136,29 @@ public class TextRequest {
 						+ ",卡号和密码如下：\n\r");
 				for (int i = 0; i < exchangeNum; i++) {
 					Goods goods = ServiceUtils.getGoodsService()
-							.selectCoodsByCardNum(
-									Integer.parseInt(cardNums.get(i)));
+							.selectCoodsByCardNum(cardNums.get(i));
 					sb.append("卡号：" + goods.getCardNum() + "密码："
 							+ goods.getCardPwd() + "\n\r");
 					ExchangeRecord exchangeRecord = new ExchangeRecord();
+					exchangeRecord.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 					exchangeRecord.setOpenid(openid);
 					exchangeRecord.setCardNum(goods.getCardNum());
 					exchangeRecord.setCardPwd(goods.getCardPwd());
 					exchangeRecord.setExchangeDate((new Date()).toString());
 					exchangeRecord.setType(goods.getType());
 					exchangeRecord.setValue(goods.getValue());
+					CommonUtils.changeCredits(openid, (-1) * value);
 					ServiceUtils.getExchangeRecordService().saveExchangeRecord(exchangeRecord);
-					ServiceUtils.getGoodsService().deleteCoodsByCardNum(Integer.parseInt(cardNums.get(i)));
+					ServiceUtils.getGoodsService().deleteGoodsById(goods.getId());
 				}
 				return sb.toString();
 			}
 			if (tmp.contains(TextContents.TELEPHONE_CARD_MINI.toString())) {
-				int value = Integer.parseInt(tmp.substring(tmp.indexOf("兑换"),
+				int value = Integer.parseInt(tmp.substring(tmp.indexOf("兑换")+2,
 						tmp.indexOf("元")));
+				if ((value != 20) && (value != 50) && (value != 100)) {
+					return TextContents.EXCHANGE_VALUE_WRONG.toString();
+				}
 				int index1 = tmp.indexOf(TextContents.TELEPHONE_CARD_MINI
 						.toString());
 				int index2 = tmp.indexOf("张");
@@ -141,8 +168,14 @@ public class TextRequest {
 				int exchangeNum = Integer.parseInt(tmp2);
 
 				/* db operation */
-				CommonUtils.changeCredits(openid, (-1) * value);
-				List<String> cardNums = ServiceUtils.getGoodsService()
+				if(user.getCredit() < value * exchangeNum){
+					String result = TextContents.EXCHANGE_CREDIT_WRONG
+							.toString()
+							+ "目前可用积分为："
+							+ user.getCredit();
+					return result;
+				}
+				List<Integer> cardNums = ServiceUtils.getGoodsService()
 						.selectCardsByTypeAndValue(
 								Integer.parseInt(GoodsType.TELEPHONE_CARD
 										.toString()), value);
@@ -152,6 +185,8 @@ public class TextRequest {
 							+ "目前只有"
 							+ cardNums.size()
 							+ "张"
+							+ value
+							+ "元"
 							+ TextContents.TELEPHONE_CARD.toString();
 					return result;
 				}
@@ -161,19 +196,20 @@ public class TextRequest {
 						+ ",卡号和密码如下：\n\r");
 				for (int i = 0; i < exchangeNum; i++) {
 					Goods goods = ServiceUtils.getGoodsService()
-							.selectCoodsByCardNum(
-									Integer.parseInt(cardNums.get(i)));
+							.selectCoodsByCardNum(cardNums.get(i));
 					sb.append("卡号：" + goods.getCardNum() + "密码："
 							+ goods.getCardPwd() + "\n\r");
 					ExchangeRecord exchangeRecord = new ExchangeRecord();
+					exchangeRecord.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 					exchangeRecord.setOpenid(openid);
 					exchangeRecord.setCardNum(goods.getCardNum());
 					exchangeRecord.setCardPwd(goods.getCardPwd());
 					exchangeRecord.setExchangeDate((new Date()).toString());
 					exchangeRecord.setType(goods.getType());
 					exchangeRecord.setValue(goods.getValue());
+					CommonUtils.changeCredits(openid, (-1) * value);
 					ServiceUtils.getExchangeRecordService().saveExchangeRecord(exchangeRecord);
-					ServiceUtils.getGoodsService().deleteCoodsByCardNum(Integer.parseInt(cardNums.get(i)));
+					ServiceUtils.getGoodsService().deleteGoodsById(goods.getId());
 				}
 				return sb.toString();
 			}

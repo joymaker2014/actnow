@@ -21,11 +21,9 @@ public interface GoodsService {
 
 	void deleteGoodsById(String id);
 	
-	int countCardNumGroupByTypeAndValue(int type, int value);
+	long countCardNumGroupByTypeAndValue(int type, int value);
 	
-	List<String> selectCardsByTypeAndValue(int type, int value);
+	List<Integer> selectCardsByTypeAndValue(int type, int value);
 	
-	Goods selectCoodsByCardNum( int cardNum);
-	
-	int deleteCoodsByCardNum(int cardNum);
+	Goods selectCoodsByCardNum(int cardNum);
 }
