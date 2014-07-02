@@ -29,18 +29,22 @@ public class VoiceRequest {
 		if (null != event) {
 			if (event.getStatus().equals(EventStatus.STARTTING)) {
 				return EventStatus.STARTTING.toString();
-			} else if (event.getStatus().equals(EventStatus.BASICOK)) {
-				ArrayList<String> details = event.getDetails();
-				if (null == details) {
-					details = new ArrayList<String>();
+			} else if (event.getStatus().equals(EventStatus.BASICOK)
+					|| event.getStatus().equals(EventStatus.ENDDING)) {
+				ArrayList<String> voiceIds = event.getVoiceIds();
+				if (null == voiceIds) {
+					voiceIds = new ArrayList<String>();
 				}
-				event.setDetails(details);
-				details.add(datas.get(ResponseKeys.MEDIAID));
+				event.setVoiceIds(voiceIds);
+				voiceIds.add(datas.get(ResponseKeys.MEDIAID));
 				DownloadMediaTimerTask dlTask = new DownloadMediaTimerTask(
 						new OneTimeTrigger(10), event.getCategory(),
 						event.getType(), MediaType.VOICE, event.getTime(),
 						datas.get(ResponseKeys.MEDIAID.toString()));
 				CommonConstants.downloadTimer.schedule(dlTask);
+				if (event.getStatus().equals(EventStatus.ENDDING)) {
+					event.setStatus(EventStatus.BASICOK);
+				}
 				return TextContents.RECEIVE_OK.toString();
 			}
 		}

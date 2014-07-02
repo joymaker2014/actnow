@@ -26,11 +26,11 @@ public class VideoRequest {
 			if (event.getStatus().equals(EventStatus.STARTTING)) {
 				return EventStatus.STARTTING.toString();
 			} else if (event.getStatus().equals(EventStatus.BASICOK)) {
-				ArrayList<String> details = event.getDetails();
+				ArrayList<String> details = event.getDescriptions();
 				if (null == details) {
 					details = new ArrayList<String>();
 				}
-				event.setDetails(details);
+				event.setDescriptions(details);
 				details.add(datas.get(ResponseKeys.MEDIAID));
 				return TextContents.RECEIVE_OK.toString();
 			}

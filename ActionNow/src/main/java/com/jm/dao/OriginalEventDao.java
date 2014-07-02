@@ -15,7 +15,10 @@ import com.jm.model.OriginalEvent;
  * 
  */
 public interface OriginalEventDao extends CrudRepository<OriginalEvent, String> {
-	@Query("select o from OriginalEvent o where o.category = ?1 and o.type = ?2 and o.district = ?3 and o.businessCircle = ?4 and o.time > dateadd(dd, -1, getdate())")
+	@Query("select o from OriginalEvent o where o.category=?1 and o.type=?2 and o.district=?3 and o.businessCircle=?4")
 	public List<OriginalEvent> findSimilarEvents(int category, int type,
 			int district, int businessCircle);
+
+	@Query("select o from OriginalEvent o where o.user.openid=?1")
+	public List<OriginalEvent> findEvents(String openid);
 }

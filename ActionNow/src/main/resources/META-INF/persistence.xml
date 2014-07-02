@@ -12,7 +12,8 @@
         <class>com.jm.model.Deal</class>
         <class>com.jm.model.Goods</class>
         <class>com.jm.model.OriginalEvent</class>
-        <class>com.jm.model.User</class>
+        <class>com.jm.model.User</class>       
+        <class>com.jm.model.UserTrace</class>
         
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		        
@@ -24,11 +25,11 @@
 			<!-- <property name="hibernate.connection.url" value="jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_actionnow"/>
 			<property name="hibernate.connection.username" value="o2zmnl3xxy"/>
 			<property name="hibernate.connection.password" value="ymil23430y50hml52mzx3k243xlxhwiyj4k5kw44"/> -->
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/testjpa"/>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3308/testjpa"/>
 			<property name="hibernate.connection.username" value="root"/>
 			<property name="hibernate.connection.password" value=""/> 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.show_sql" value="false"/>
 			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.use_sql_comments" value="false"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>

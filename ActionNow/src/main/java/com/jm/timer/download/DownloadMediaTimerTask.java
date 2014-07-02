@@ -16,6 +16,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.jm.constants.MediaType;
 import com.jm.constants.UrlConstants;
 import com.jm.timer.TimerTask;
@@ -87,6 +89,15 @@ public class DownloadMediaTimerTask extends TimerTask {
 				long len = entity.getContentLength();
 				if (len != -1) {
 					byte[] content = EntityUtils.toByteArray(entity);
+					JSONObject object = null;
+					try {
+						object = JSON.parseObject(new String(content, "UTF-8"));
+					} catch (Exception e) {
+					} finally {
+						if (null != object && null != object.get("errmsg")) {
+							return;
+						}
+					}
 					System.out.println(response.getStatusLine());
 					OutputStream os = new FileOutputStream(fileName);
 					// 开始读取

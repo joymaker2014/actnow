@@ -321,8 +321,36 @@ function loadType(categoryid){
  * 查询选定类型和区域的已有事件
  */
 function loadEvent(){
-	$("#events").css("display","block");
-//	$("#events").attr("display","block");
+	var url = appDomain + "/similarevents";
+	jQuery.ajax( {
+		type : "GET",
+		dataTyel : "json",
+		url : url,
+		data : "category=" + $("#category").val() + "&type=" + $("#type").val()
+					+ "&district="+ $("#city").val() +"&businessCircle=" +  $("#county").val(),
+		cache : false,
+		success : function(result) {
+			if (result == null || result.length == 0) {
+				$("#event-all").css("display","none");
+				$("#event-none").css("display","block");
+			} else {
+				$('#events').dataTable( {
+					"data" : result,
+					"columns": [
+						{ "data": "type" },
+						{ "data": "businessCircle" },
+						{ "data": "address" },
+						{ "data": "time" }
+					]
+				} );
+				$("#event-all").css("display","block");
+				$("#event-none").css("display","none");
+			}
+		},
+		error : function(XMLHttpResponse) {
+		}
+	});
+	$("#eventsdiv").css("display","block");
 }
 function submit(){
 	var url=appDomain+"/basicinfo";
@@ -344,7 +372,8 @@ function submit(){
 		cache : false,
 		success : function(result) {
 			//alert("提交是否成功");
-			window.open('','_self');
+			window.top.opener = null;
+			//window.open('','_self');
 			window.close();
 			WeixinJSBridge.call('closeWindow');
 		},
@@ -358,7 +387,39 @@ function cancel(){
 	window.close();
 	WeixinJSBridge.call('closeWindow');
 }
-$(function() {
-	loadProvince();
-	loadCategory();
-});
+
+
+
+/**
+ * 用户已提交的事件
+ */
+function loadSubmitedEvent(){
+	var url = appDomain + "/submitedevents";
+	jQuery.ajax( {
+		type : "GET",
+		dataTyel : "json",
+		url : url,
+		data : "openid=" +  $("#openid").val(),
+		cache : false,
+		success : function(result) {
+			if (result == null || result.length == 0) {
+				$("#event-all").css("display","none");
+				$("#event-none").css("display","block");
+			} else {
+				$('#events').dataTable( {
+					"data" : result,
+					"columns": [
+						{ "data": "type" },
+						{ "data": "businessCircle" },
+						{ "data": "address" },
+						{ "data": "time" }
+					]
+				} );
+				$("#event-all").css("display","block");
+				$("#event-none").css("display","none");
+			}
+		},
+		error : function(XMLHttpResponse) {
+		}
+	});
+}

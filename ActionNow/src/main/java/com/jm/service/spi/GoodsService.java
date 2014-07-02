@@ -18,4 +18,6 @@ public interface GoodsService {
 	void updateGoods(Goods goods);
 
 	void deleteGoodsById(String id);
+	
+	int countCardNumGroupByTypeAndValue(int type, int value);
 }

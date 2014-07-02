@@ -4,6 +4,7 @@
 package com.jm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jm.dao.GoodsDao;
@@ -14,6 +15,7 @@ import com.jm.service.spi.GoodsService;
  * @author LuZheqi
  * 
  */
+@Service("goodsService")
 public class GoodsServiceImpl implements GoodsService {
 	@Autowired
 	private GoodsDao goodsDao;
@@ -60,6 +62,12 @@ public class GoodsServiceImpl implements GoodsService {
 	@Transactional
 	public void deleteGoodsById(String id) {
 		goodsDao.delete(id);
+	}
+
+	@Override
+	@Transactional
+	public int countCardNumGroupByTypeAndValue(int type, int value) {
+		return goodsDao.countCardNumGroupByTypeAndValue(type, value);
 	}
 
 }

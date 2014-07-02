@@ -132,16 +132,41 @@ public class WeixinClient {
 		btn23.setType("click");
 		btn23.setKey("23");
 
+
+		CommonButton btn24 = new CommonButton();
+		btn24.setName("兑换记录");
+		btn24.setType("click");
+		btn24.setKey("24");
+
+		CommonButton btn25 = new CommonButton();
+		btn25.setName("积分排行榜");
+		btn25.setType("click");
+		btn25.setKey("25");
+		
+		CommonButton btn31 = new CommonButton();
+		btn31.setName("添加积分");
+		btn31.setType("click");
+		btn31.setKey("31");
+
+		CommonButton btn32 = new CommonButton();
+		btn32.setName("添加奖品");
+		btn32.setType("click");
+		btn32.setKey("32");
+
 		ComplexButton mainBtn1 = new ComplexButton();
 		mainBtn1.setName("身边的事");
 		mainBtn1.setSub_button(new CommonButton[] { btn11, btn12, btn13, });
 
 		ComplexButton mainBtn2 = new ComplexButton();
 		mainBtn2.setName("积分奖品");
-		mainBtn2.setSub_button(new CommonButton[] { btn21, btn22, btn23 });
+		mainBtn2.setSub_button(new CommonButton[] { btn21, btn22, btn23, btn24, btn25 });
+
+		ComplexButton mainBtn3 = new ComplexButton();
+		mainBtn3.setName("软件测试");
+		mainBtn3.setSub_button(new CommonButton[] { btn31, btn32 });
 
 		Menu menu = new Menu();
-		menu.setButton(new Button[] { mainBtn1, mainBtn2 });
+		menu.setButton(new Button[] { mainBtn1, mainBtn2 , mainBtn3 });
 
 		try {
 			String url = UrlConstants.CREATE_MENU_URL.replace("ACCESS_TOKEN",

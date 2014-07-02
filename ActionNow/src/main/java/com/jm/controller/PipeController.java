@@ -25,6 +25,7 @@ import org.xml.sax.InputSource;
 
 import com.jm.communication.session.EventSession;
 import com.jm.communication.session.ImageSession;
+import com.jm.communication.session.LocationSession;
 import com.jm.communication.session.TextSession;
 import com.jm.communication.session.VoiceSession;
 import com.jm.constants.CommonConstants;
@@ -94,8 +95,11 @@ public class PipeController {
 				responseStr = new EventSession(datas).execute();
 			} else if (MessageType.Image.toString().equalsIgnoreCase(msgType)) {
 				responseStr = new ImageSession(datas).execute();
-			}else if (MessageType.Voice.toString().equalsIgnoreCase(msgType)) {
+			} else if (MessageType.Voice.toString().equalsIgnoreCase(msgType)) {
 				responseStr = new VoiceSession(datas).execute();
+			} else if (MessageType.Location.toString()
+					.equalsIgnoreCase(msgType)) {
+				responseStr = new LocationSession(datas).execute();
 			}
 			return responseStr;
 		} catch (JDOMException e) {
