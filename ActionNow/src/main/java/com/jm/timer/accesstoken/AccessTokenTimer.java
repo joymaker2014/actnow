@@ -3,7 +3,7 @@
  */
 package com.jm.timer.accesstoken;
 
-import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.Lock;
@@ -11,7 +11,6 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
@@ -68,6 +67,22 @@ public class AccessTokenTimer extends TimerTask {
 	public static void setAccessToken() {
 		writeLock.lock();
 		try {
+			while (!fetchAccessToken()) {
+				try {
+					Thread.sleep(60000L);
+					System.out.println("********************Try Again!");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		} finally {
+			writeLock.unlock();
+		}
+	}
+
+	public static boolean fetchAccessToken() {
+		boolean setOK = true;
+		try {
 			HttpClient httpClient = DefaultSSLSocketFactory.getInstance()
 					.wrapedHttpClient();
 			HttpGet get = new HttpGet(UrlConstants.GET_TOKEN_URL.replace(
@@ -83,12 +98,13 @@ public class AccessTokenTimer extends TimerTask {
 				token = new AccessToken();
 			}
 			token.setAccessToken(object.getString("access_token"));
-		} catch (ClientProtocolException e) {
+		} catch (UnknownHostException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+			setOK = false;
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			writeLock.unlock();
+			setOK = false;
 		}
+		return setOK;
 	}
 }

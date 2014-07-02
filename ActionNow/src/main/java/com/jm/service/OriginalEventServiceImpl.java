@@ -3,6 +3,8 @@
  */
 package com.jm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,8 +70,17 @@ public class OriginalEventServiceImpl implements OriginalEventService {
 	 * lang.String)
 	 */
 	@Override
+	@Transactional
 	public void deleteOriginalEventById(String id) {
 		originalEventDao.delete(id);
+	}
+
+	@Override
+	@Transactional
+	public List<OriginalEvent> getSimilarEvents(int category, int type,
+			int district, int businessCircle) {
+		return originalEventDao.findSimilarEvents(category, type, district,
+				businessCircle);
 	}
 
 }

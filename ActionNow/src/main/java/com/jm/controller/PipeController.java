@@ -24,8 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.xml.sax.InputSource;
 
 import com.jm.communication.session.EventSession;
+import com.jm.communication.session.ImageSession;
 import com.jm.communication.session.TextSession;
+import com.jm.communication.session.VoiceSession;
+import com.jm.constants.CommonConstants;
 import com.jm.constants.MessageType;
+import com.jm.timer.user.UserCheckTimerTask;
 import com.jm.util.ResponseUtils;
 
 /**
@@ -80,12 +84,18 @@ public class PipeController {
 			String msgType = root.getChild("MsgType").getText();
 			String toUserName = root.getChild("ToUserName").getText();
 			String fromUserName = root.getChild("FromUserName").getText();
+			CommonConstants.mixTimer.schedule(new UserCheckTimerTask(
+					fromUserName));
 			String responseStr = ResponseUtils.createTextResponse(fromUserName,
 					toUserName, null);
 			if (MessageType.Text.toString().equalsIgnoreCase(msgType)) {
 				responseStr = new TextSession(datas).execute();
 			} else if (MessageType.Event.toString().equalsIgnoreCase(msgType)) {
 				responseStr = new EventSession(datas).execute();
+			} else if (MessageType.Image.toString().equalsIgnoreCase(msgType)) {
+				responseStr = new ImageSession(datas).execute();
+			}else if (MessageType.Voice.toString().equalsIgnoreCase(msgType)) {
+				responseStr = new VoiceSession(datas).execute();
 			}
 			return responseStr;
 		} catch (JDOMException e) {

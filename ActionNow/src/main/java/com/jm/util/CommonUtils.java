@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 
 import com.jm.constants.EventType;
 import com.jm.constants.request.RequestKeys;
+import com.jm.model.User;
 
 /**
  * @author LuZheqi
@@ -54,4 +56,22 @@ public class CommonUtils {
 			e.printStackTrace();
 		}
 	}
+
+	public static long changeCredits(String openid, long change) {
+		User existUser = ServiceUtils.getUserService().findUserById(openid);
+		long tmp = existUser.getCredit() + change;
+		existUser.setCredit(tmp);
+		ServiceUtils.getUserService().saveUser(existUser);
+		return tmp;
+	}
+	
+	public static int randomNumbers(int count){
+		Random random = new Random(System.currentTimeMillis());
+		String tmp = "";
+		for(int i = 0;i < count; i++){
+			tmp += random.nextInt(10);
+		}
+		return Integer.parseInt(tmp);
+	}
+
 }
