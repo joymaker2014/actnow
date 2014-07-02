@@ -175,227 +175,7 @@ public class EventRequest {
 										100) + " 张\n\r");
 				return sb.toString();
 
-			} else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE.toString())) {
-				StringBuffer sb = new StringBuffer();
-				sb.append(TextContents.INTRODUCE_AWARD_INFO);
-				sb.append("1. " + TextContents.SHOPPING_CARD + ":\n\r");
-				sb.append("\t\t20元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										20) + " 张\n\r");
-				sb.append("\t\t50元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										50) + " 张\n\r");
-				sb.append("\t\t100元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										100) + " 张\n\r");
-				sb.append("2. " + TextContents.TRANSPORT_CARD + ":\n\r");
-				sb.append("\t\t20元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										20) + " 张\n\r");
-				sb.append("\t\t50元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										50) + " 张\n\r");
-				sb.append("\t\t100元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										100) + " 张\n\r");
-				sb.append("3. " + TextContents.TELEPHONE_CARD + ":\n\r");
-				sb.append("\t\t20元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										20) + " 张\n\r");
-				sb.append("\t\t50元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										50) + " 张\n\r");
-				sb.append("\t\t100元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										100) + " 张\n\r");
-				sb.append(TextContents.EXCHAGE_INFO.toString());
-				return sb.toString();
-
-			} else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE_QUERY
-					.toString())) {
-				return TextContents.DEVELOPING.toString();
-			} else if (eventKey.equalsIgnoreCase(EventKey.CREDITS_RANKING_LIST
-					.toString())) {
-				return TextContents.DEVELOPING.toString();
-			} else if (eventKey.equalsIgnoreCase(EventKey.ADD_CREDITS
-					.toString())) {
-				long tmp = CommonUtils.changeCredits(openid, 100);
-				return TextContents.Change_CREDITS_INFO.toString() + tmp;
-			} else if (eventKey
-					.equalsIgnoreCase(EventKey.ADD_AWARDS.toString())) {
-				/* 在插入之前最好判断下cardNum是否有重复，如果有则重新生成一个cardNum，此处为了简便，省略这个步骤 */
-				Goods goods1 = new Goods();
-				goods1.setType(Integer.valueOf(GoodsType.SHOPPING_CARD
-						.toString()));
-				goods1.setCardNum(CommonUtils.randomNumbers(8));
-				goods1.setCardPwd(CommonUtils.randomNumbers(4));
-				goods1.setValue(20);
-				ServiceUtils.getGoodsService().saveGoods(goods1);
-
-				Goods goods2 = new Goods();
-				goods2.setType(Integer.valueOf(GoodsType.SHOPPING_CARD
-						.toString()));
-				goods2.setCardNum(CommonUtils.randomNumbers(8));
-				goods2.setCardPwd(CommonUtils.randomNumbers(4));
-				goods2.setValue(50);
-				ServiceUtils.getGoodsService().saveGoods(goods2);
-
-				Goods goods3 = new Goods();
-				goods3.setType(Integer.valueOf(GoodsType.SHOPPING_CARD
-						.toString()));
-				goods3.setCardNum(CommonUtils.randomNumbers(8));
-				goods3.setCardPwd(CommonUtils.randomNumbers(4));
-				goods3.setValue(100);
-				ServiceUtils.getGoodsService().saveGoods(goods3);
-
-				Goods goods4 = new Goods();
-				goods4.setType(Integer.valueOf(GoodsType.TRANSPORT_CARD
-						.toString()));
-				goods4.setCardNum(CommonUtils.randomNumbers(8));
-				goods4.setCardPwd(CommonUtils.randomNumbers(4));
-				goods4.setValue(20);
-				ServiceUtils.getGoodsService().saveGoods(goods4);
-
-				Goods goods5 = new Goods();
-				goods5.setType(Integer.valueOf(GoodsType.TRANSPORT_CARD
-						.toString()));
-				goods5.setCardNum(CommonUtils.randomNumbers(8));
-				goods5.setCardPwd(CommonUtils.randomNumbers(4));
-				goods5.setValue(50);
-				ServiceUtils.getGoodsService().saveGoods(goods5);
-
-				Goods goods6 = new Goods();
-				goods6.setType(Integer.valueOf(GoodsType.TRANSPORT_CARD
-						.toString()));
-				goods6.setCardNum(CommonUtils.randomNumbers(8));
-				goods6.setCardPwd(CommonUtils.randomNumbers(4));
-				goods6.setValue(100);
-				ServiceUtils.getGoodsService().saveGoods(goods6);
-
-				Goods goods7 = new Goods();
-				goods7.setType(Integer.valueOf(GoodsType.TELEPHONE_CARD
-						.toString()));
-				goods7.setCardNum(CommonUtils.randomNumbers(8));
-				goods7.setCardPwd(CommonUtils.randomNumbers(4));
-				goods7.setValue(20);
-				ServiceUtils.getGoodsService().saveGoods(goods7);
-
-				Goods goods8 = new Goods();
-				goods8.setType(Integer.valueOf(GoodsType.TELEPHONE_CARD
-						.toString()));
-				goods8.setCardNum(CommonUtils.randomNumbers(8));
-				goods8.setCardPwd(CommonUtils.randomNumbers(4));
-				goods8.setValue(50);
-				ServiceUtils.getGoodsService().saveGoods(goods8);
-
-				Goods goods9 = new Goods();
-				goods9.setType(Integer.valueOf(GoodsType.TELEPHONE_CARD
-						.toString()));
-				goods9.setCardNum(CommonUtils.randomNumbers(8));
-				goods9.setCardPwd(CommonUtils.randomNumbers(4));
-				goods9.setValue(100);
-				ServiceUtils.getGoodsService().saveGoods(goods9);
-
-				return TextContents.DEVELOPING.toString();
-			} else if (eventKey.equalsIgnoreCase(EventKey.CREDITS_INFO
-					.toString())) {
-				if (null != existUser) {
-					return TextContents.GET_CREDITS_INFO.toString()
-							+ existUser.getCredit();
-				} else {
-					return TextContents.GET_CREDITS_INFO.toString() + "-1";
-				}
-			} else if (eventKey
-					.equalsIgnoreCase(EventKey.AWARD_INFO.toString())) {
-				StringBuffer sb = new StringBuffer();
-				sb.append(TextContents.INTRODUCE_AWARD_INFO);
-				sb.append("1. " + TextContents.SHOPPING_CARD + ":\n\r");
-				sb.append("\t\t20元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD
-												.toString()), 20) + " 张\n\r");
-				sb.append("\t\t50元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD
-												.toString()), 50) + " 张\n\r");
-				sb.append("\t\t100元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD
-												.toString()), 100) + " 张\n\r");
-				sb.append("2. " + TextContents.TRANSPORT_CARD + ":\n\r");
-				sb.append("\t\t20元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD
-												.toString()), 20) + " 张\n\r");
-				sb.append("\t\t50元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD
-												.toString()), 50) + " 张\n\r");
-				sb.append("\t\t100元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD
-												.toString()), 100) + " 张\n\r");
-				sb.append("3. " + TextContents.TELEPHONE_CARD + ":\n\r");
-				sb.append("\t\t20元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD
-												.toString()), 20) + " 张\n\r");
-				sb.append("\t\t50元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD
-												.toString()), 50) + " 张\n\r");
-				sb.append("\t\t100元\t"
-						+ ServiceUtils
-								.getGoodsService()
-								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD
-												.toString()), 100) + " 张\n\r");
-				return sb.toString();
-
-			} else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE.toString())) {
+			}  else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE.toString())) {
 				StringBuffer sb = new StringBuffer();
 				sb.append(TextContents.INTRODUCE_AWARD_INFO);
 				sb.append("1. " + TextContents.SHOPPING_CARD + ":\n\r");
@@ -465,6 +245,9 @@ public class EventRequest {
 				List<ExchangeRecord> exchangeRecords = ServiceUtils
 						.getExchangeRecordService().findExchangeRecordByOpenid(
 								openid);
+				if(exchangeRecords == null){
+					return TextContents.EXCHANGE_QUERY_NULL.toString();
+				}
 				for (int i = 0; i < exchangeRecords.size(); i++) {
 					sb.append("日期：" + exchangeRecords.get(i).getExchangeDate()
 							+ "\t");
@@ -485,7 +268,7 @@ public class EventRequest {
 				sb.append(TextContents.CREDITS_RANKING_INFO);
 				List<User> users = ServiceUtils.getUserService()
 						.findOrderByCreditDesc();
-				for (int i = 0; i < users.size(); i++) {
+				for (int i = 0; i < 10; i++) {
 					sb.append("第" + (i + 1) + "名： " + users.get(i).getOpenid()
 							+ "\t" + users.get(i).getCredit() + "\n\r");
 				}
@@ -493,83 +276,92 @@ public class EventRequest {
 			} else if (eventKey.equalsIgnoreCase(EventKey.ADD_CREDITS
 					.toString())) {
 				long tmp = CommonUtils.changeCredits(openid, 100);
-				return TextContents.Change_CREDITS_INFO.toString() + tmp;
+				return TextContents.Change_CREDITS_INFO.toString()+ "100。您目前的可用积分为：" + tmp + "。";
 			} else if (eventKey
 					.equalsIgnoreCase(EventKey.ADD_AWARDS.toString())) {
 				/* 在插入之前最好判断下cardNum是否有重复，如果有则重新生成一个cardNum，此处为了简便，省略这个步骤 */
 				Goods goods1 = new Goods();
 				goods1.setType(Integer.valueOf(GoodsType.SHOPPING_CARD
 						.toString()));
-				goods1.setCardNum(CommonUtils.randomNumbers(8));
+				goods1.setCardNum(CommonUtils.randomNumbers(5));
 				goods1.setCardPwd(CommonUtils.randomNumbers(4));
 				goods1.setValue(20);
+				goods1.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 				ServiceUtils.getGoodsService().saveGoods(goods1);
 
 				Goods goods2 = new Goods();
 				goods2.setType(Integer.valueOf(GoodsType.SHOPPING_CARD
 						.toString()));
-				goods2.setCardNum(CommonUtils.randomNumbers(8));
+				goods2.setCardNum(CommonUtils.randomNumbers(5));
 				goods2.setCardPwd(CommonUtils.randomNumbers(4));
 				goods2.setValue(50);
+				goods2.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 				ServiceUtils.getGoodsService().saveGoods(goods2);
 
 				Goods goods3 = new Goods();
 				goods3.setType(Integer.valueOf(GoodsType.SHOPPING_CARD
 						.toString()));
-				goods3.setCardNum(CommonUtils.randomNumbers(8));
+				goods3.setCardNum(CommonUtils.randomNumbers(5));
 				goods3.setCardPwd(CommonUtils.randomNumbers(4));
 				goods3.setValue(100);
+				goods3.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 				ServiceUtils.getGoodsService().saveGoods(goods3);
 
 				Goods goods4 = new Goods();
 				goods4.setType(Integer.valueOf(GoodsType.TRANSPORT_CARD
 						.toString()));
-				goods4.setCardNum(CommonUtils.randomNumbers(8));
+				goods4.setCardNum(CommonUtils.randomNumbers(5));
 				goods4.setCardPwd(CommonUtils.randomNumbers(4));
 				goods4.setValue(20);
+				goods4.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 				ServiceUtils.getGoodsService().saveGoods(goods4);
 
 				Goods goods5 = new Goods();
 				goods5.setType(Integer.valueOf(GoodsType.TRANSPORT_CARD
 						.toString()));
-				goods5.setCardNum(CommonUtils.randomNumbers(8));
+				goods5.setCardNum(CommonUtils.randomNumbers(5));
 				goods5.setCardPwd(CommonUtils.randomNumbers(4));
 				goods5.setValue(50);
+				goods5.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 				ServiceUtils.getGoodsService().saveGoods(goods5);
 
 				Goods goods6 = new Goods();
 				goods6.setType(Integer.valueOf(GoodsType.TRANSPORT_CARD
 						.toString()));
-				goods6.setCardNum(CommonUtils.randomNumbers(8));
+				goods6.setCardNum(CommonUtils.randomNumbers(5));
 				goods6.setCardPwd(CommonUtils.randomNumbers(4));
 				goods6.setValue(100);
+				goods6.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 				ServiceUtils.getGoodsService().saveGoods(goods6);
 
 				Goods goods7 = new Goods();
 				goods7.setType(Integer.valueOf(GoodsType.TELEPHONE_CARD
 						.toString()));
-				goods7.setCardNum(CommonUtils.randomNumbers(8));
+				goods7.setCardNum(CommonUtils.randomNumbers(5));
 				goods7.setCardPwd(CommonUtils.randomNumbers(4));
 				goods7.setValue(20);
+				goods7.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 				ServiceUtils.getGoodsService().saveGoods(goods7);
 
 				Goods goods8 = new Goods();
 				goods8.setType(Integer.valueOf(GoodsType.TELEPHONE_CARD
 						.toString()));
-				goods8.setCardNum(CommonUtils.randomNumbers(8));
+				goods8.setCardNum(CommonUtils.randomNumbers(5));
 				goods8.setCardPwd(CommonUtils.randomNumbers(4));
 				goods8.setValue(50);
+				goods8.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 				ServiceUtils.getGoodsService().saveGoods(goods8);
 
 				Goods goods9 = new Goods();
 				goods9.setType(Integer.valueOf(GoodsType.TELEPHONE_CARD
 						.toString()));
-				goods9.setCardNum(CommonUtils.randomNumbers(8));
+				goods9.setCardNum(CommonUtils.randomNumbers(5));
 				goods9.setCardPwd(CommonUtils.randomNumbers(4));
 				goods9.setValue(100);
+				goods9.setId(Integer.toString(CommonUtils.randomNumbers(5)));
 				ServiceUtils.getGoodsService().saveGoods(goods9);
 
-				return TextContents.DEVELOPING.toString();
+				return TextContents.ADD_AWARDS.toString();
 			}
 		}
 		if (eventType.equalsIgnoreCase(EventType.LOCATION.toString())) {
