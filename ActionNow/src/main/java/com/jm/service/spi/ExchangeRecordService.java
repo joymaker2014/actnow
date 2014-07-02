@@ -3,10 +3,9 @@
  */
 package com.jm.service.spi;
 
-import com.jm.model.ExchangeRecord;
-import com.jm.model.Goods;
-
 import java.util.List;
+
+import com.jm.model.ExchangeRecord;
 
 /**
  * @author mzl

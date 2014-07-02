@@ -9,8 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.jm.model.ExchangeRecord;
-import com.jm.model.Goods;
-import com.jm.model.User;
 
 /**
  * @author mzl
@@ -18,6 +16,6 @@ import com.jm.model.User;
  */
 public interface ExchangeRecordDao extends
 		CrudRepository<ExchangeRecord, String> {
-	@Query("select e from ExchangeRecord e where u.openid=?1")
+	@Query("select e from ExchangeRecord e where e.openid=?1")
 	public List<ExchangeRecord> findExchangeRecordByOpenid(String openid);
 }

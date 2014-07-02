@@ -10,11 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jm.dao.ExchangeRecordDao;
-import com.jm.dao.GoodsDao;
 import com.jm.model.ExchangeRecord;
-import com.jm.model.Goods;
 import com.jm.service.spi.ExchangeRecordService;
-import com.jm.service.spi.GoodsService;
 
 /**
  * @author mzl

@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "t_exchangeRecord")
+@Table(name = "t_exchangerecord")
 public class ExchangeRecord {
 	@Id
 	private String id;
