@@ -18,6 +18,6 @@ public interface UserDao extends CrudRepository<User, String> {
 	@Query("select u from User u where u.nickname like 'user%' order by u.nickname desc")
 	public List<User> findOrderByNicknameDesc();
 	
-	@Query("select u from User u order by u.credit desc limit 10")
+	@Query("select u from User u order by u.credit desc")
 	public List<User> findOrderByCreditDesc();
 }

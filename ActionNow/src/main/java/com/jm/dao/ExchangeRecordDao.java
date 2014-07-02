@@ -18,6 +18,6 @@ import com.jm.model.User;
  */
 public interface ExchangeRecordDao extends
 		CrudRepository<ExchangeRecord, String> {
-	@Query("select e from ExchangeRecord e where u.openid=?1")
+	@Query("select e from ExchangeRecord e where e.openid=?1")
 	public List<ExchangeRecord> findExchangeRecordByOpenid(String openid);
 }

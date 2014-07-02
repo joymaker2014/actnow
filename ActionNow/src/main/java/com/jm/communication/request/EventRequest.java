@@ -485,7 +485,7 @@ public class EventRequest {
 				sb.append(TextContents.CREDITS_RANKING_INFO);
 				List<User> users = ServiceUtils.getUserService()
 						.findOrderByCreditDesc();
-				for (int i = 0; i < users.size(); i++) {
+				for (int i = 0; i < 10; i++) {
 					sb.append("第" + (i + 1) + "名： " + users.get(i).getOpenid()
 							+ "\t" + users.get(i).getCredit() + "\n\r");
 				}

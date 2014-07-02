@@ -13,6 +13,8 @@
         <class>com.jm.model.Goods</class>
         <class>com.jm.model.OriginalEvent</class>
         <class>com.jm.model.User</class>
+        <class>com.jm.model.UserTrace</class>
+        <class>com.jm.model.ExchangeRecord</class>
         
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		        
