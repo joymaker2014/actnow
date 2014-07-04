@@ -21,7 +21,7 @@ public class EventResponse {
 		String toUserName = datas.get(RequestKeys.TOUSERNAME.toString());
 		String fromUserName = datas.get(RequestKeys.FROMUSERNAME.toString());
 		String response = result;
-		if (EventType.SUBSCRIBE.toString().equalsIgnoreCase(result)) {
+		if (null == result || EventType.SUBSCRIBE.toString().equalsIgnoreCase(result)) {
 			response = TextContents.WELCOME.toString();
 		} else if (result.equals(EventStatus.STARTTING.toString())) {
 			StringBuilder sb = new StringBuilder(

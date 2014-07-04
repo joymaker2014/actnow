@@ -51,7 +51,6 @@ public class ExchangeRecordServiceImpl implements ExchangeRecordService {
 	@Override
 	@Transactional
 	public List<ExchangeRecord> findExchangeRecordByOpenid(String openid){
-		exchangeRecordDao.findExchangeRecordByOpenid(openid);
-		return null;
+		return exchangeRecordDao.findExchangeRecordByOpenid(openid);
 	}
 }
