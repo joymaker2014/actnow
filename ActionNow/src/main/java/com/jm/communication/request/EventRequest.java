@@ -121,61 +121,61 @@ public class EventRequest {
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										20) + " 张\n\r");
+										Integer.parseInt(GoodsType.SHOPPING_CARD
+												.toString()), 20) + " 张\n\r");
 				sb.append("\t\t50元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										50) + " 张\n\r");
+										Integer.parseInt(GoodsType.SHOPPING_CARD
+												.toString()), 50) + " 张\n\r");
 				sb.append("\t\t100元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.SHOPPING_CARD.toString()),
-										100) + " 张\n\r");
+										Integer.parseInt(GoodsType.SHOPPING_CARD
+												.toString()), 100) + " 张\n\r");
 				sb.append("2. " + TextContents.TRANSPORT_CARD + ":\n\r");
 				sb.append("\t\t20元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										20) + " 张\n\r");
+										Integer.parseInt(GoodsType.TRANSPORT_CARD
+												.toString()), 20) + " 张\n\r");
 				sb.append("\t\t50元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										50) + " 张\n\r");
+										Integer.parseInt(GoodsType.TRANSPORT_CARD
+												.toString()), 50) + " 张\n\r");
 				sb.append("\t\t100元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TRANSPORT_CARD.toString()),
-										100) + " 张\n\r");
+										Integer.parseInt(GoodsType.TRANSPORT_CARD
+												.toString()), 100) + " 张\n\r");
 				sb.append("3. " + TextContents.TELEPHONE_CARD + ":\n\r");
 				sb.append("\t\t20元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										20) + " 张\n\r");
+										Integer.parseInt(GoodsType.TELEPHONE_CARD
+												.toString()), 20) + " 张\n\r");
 				sb.append("\t\t50元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										50) + " 张\n\r");
+										Integer.parseInt(GoodsType.TELEPHONE_CARD
+												.toString()), 50) + " 张\n\r");
 				sb.append("\t\t100元\t"
 						+ ServiceUtils
 								.getGoodsService()
 								.countCardNumGroupByTypeAndValue(
-										Integer.parseInt(GoodsType.TELEPHONE_CARD.toString()),
-										100) + " 张\n\r");
+										Integer.parseInt(GoodsType.TELEPHONE_CARD
+												.toString()), 100) + " 张\n\r");
 				return sb.toString();
 
-			}  else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE.toString())) {
+			} else if (eventKey.equalsIgnoreCase(EventKey.EXCHANGE.toString())) {
 				StringBuffer sb = new StringBuffer();
 				sb.append(TextContents.INTRODUCE_AWARD_INFO);
 				sb.append("1. " + TextContents.SHOPPING_CARD + ":\n\r");
@@ -245,7 +245,7 @@ public class EventRequest {
 				List<ExchangeRecord> exchangeRecords = ServiceUtils
 						.getExchangeRecordService().findExchangeRecordByOpenid(
 								openid);
-				if(exchangeRecords == null){
+				if (exchangeRecords == null) {
 					return TextContents.EXCHANGE_QUERY_NULL.toString();
 				}
 				for (int i = 0; i < exchangeRecords.size(); i++) {
@@ -269,14 +269,16 @@ public class EventRequest {
 				List<User> users = ServiceUtils.getUserService()
 						.findOrderByCreditDesc();
 				for (int i = 0; i < 3; i++) {
-					sb.append("第" + (i + 1) + "名： " + users.get(i).getNickname()
-							+ "\t" + users.get(i).getCredit() + "\n\r");
+					sb.append("第" + (i + 1) + "名： "
+							+ users.get(i).getNickname() + "\t"
+							+ users.get(i).getCredit() + "\n\r");
 				}
 				return sb.toString();
 			} else if (eventKey.equalsIgnoreCase(EventKey.ADD_CREDITS
 					.toString())) {
 				long tmp = CommonUtils.changeCredits(openid, 100);
-				return TextContents.Change_CREDITS_INFO.toString()+ "100。您目前的可用积分为：" + tmp + "。";
+				return TextContents.Change_CREDITS_INFO.toString()
+						+ "100。您目前的可用积分为：" + tmp + "。";
 			} else if (eventKey
 					.equalsIgnoreCase(EventKey.ADD_AWARDS.toString())) {
 				/* 在插入之前最好判断下cardNum是否有重复，如果有则重新生成一个cardNum，此处为了简便，省略这个步骤 */
@@ -371,10 +373,11 @@ public class EventRequest {
 			userTrace.setLongitude(Double.valueOf(CommonUtils.getRequestValue(
 					datas, RequestKeys.LONGITUDE)));
 			userTrace.setOpenid(openid);
-			userTrace.setPrec(Double.valueOf(CommonUtils.getRequestValue(
-					datas, RequestKeys.PRECISION)));
+			userTrace.setPrec(Double.valueOf(CommonUtils.getRequestValue(datas,
+					RequestKeys.PRECISION)));
 			userTrace.setTime(new Date());
 			ServiceUtils.getUserTraceService().saveUserTrace(userTrace);
+			return "";
 		}
 		return null;
 	}

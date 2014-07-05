@@ -48,11 +48,9 @@ public class UserCheckTimerTask extends TimerTask {
 			return;
 		}
 		User user = ServiceUtils.getUserService().findUserById(openid);
-		if (null == user) {
-			return;
-		}
 		String regEx = "user.*";
-		boolean result = Pattern.matches(regEx, user.getNickname());
+		boolean result = null == user
+				|| Pattern.matches(regEx, user.getNickname());
 		if (result) {
 			try {
 				String url = UrlConstants.GET_USER_INFO_URL.replace(
@@ -70,6 +68,10 @@ public class UserCheckTimerTask extends TimerTask {
 				JSONObject object = JSON.parseObject(jsonStr);
 
 				if (null == object.get("errmsg")) {
+					if(null == user){
+						user = new User();
+						user.setOpenid(openid);
+					}
 					user.setSubscribe(object.getBooleanValue("subscribe"));
 					user.setNickname(object.getString("nickname"));
 					user.setSex(object.getIntValue("sex"));
@@ -79,6 +81,7 @@ public class UserCheckTimerTask extends TimerTask {
 					user.setLanguage(object.getString("language"));
 					user.setHeadImageUrl(object.getString("headimgurl"));
 					user.setSubscribeTime(object.getDate("subscribe_time"));
+					user.setSubscribe(true);
 					ServiceUtils.getUserService().updateUser(user);
 					checkedOpenIds.add(openid);
 				}
